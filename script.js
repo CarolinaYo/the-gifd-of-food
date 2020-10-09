@@ -1,5 +1,3 @@
-
-
 //---------------JS required for swiper element---------------
 var swiper = new Swiper('.swiper-container', {
     effect: 'coverflow',
@@ -14,6 +12,6 @@ var swiper = new Swiper('.swiper-container', {
       slideShadows: true,
     },
     pagination: {
-      el: '.swiper-pagination',
-    },
+        el: '.swiper-pagination',
+      },
   });
