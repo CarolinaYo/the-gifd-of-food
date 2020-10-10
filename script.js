@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+
+    //=============================================================================
     //---------------JS required for swiper element---------------
     var swiper = new Swiper('.swiper-container', {
         effect: 'coverflow',
@@ -17,8 +19,23 @@ $(document).ready(function() {
             el: '.swiper-pagination',
         },
     });
+//=============================================================================
 
 
+
+// ============================================================================
+if (localStorage.getItem('searchedFoodItem') === null)
+
+
+
+// ============================================================================
+
+
+
+
+
+//=============================================================================
+// ---------------------HANDLES API CALL FROM USER INPUT-----------------------
     // Function to get responses from the api based on user input
     const getRecipe = mealInput => {
         // Get a list of recipes
@@ -31,7 +48,7 @@ $(document).ready(function() {
 
         }).then(function() {
             // Get a gify
-            let limit = 10
+            let limit = 10;
             $.ajax({
                 url:`https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${ mealInput }&limit=${ limit }&offset=0&rating=g&lang=en`,
                 method: 'GET'
@@ -41,15 +58,32 @@ $(document).ready(function() {
 
                 // Updating slider with gify response ¯\_(ツ)_/¯....
                 $('.swiper-slide').each(function( index ){
+
                     $(this).css("background-image", "url(" + gifyResponse.data[index].images.original.url + ")");
-                    console.log(gifyResponse.data[index].images.original.url);
+
+
+                    // console.log(gifyResponse.data[index].images.original.url);
                 })
 
             })
         })
     }
+getRecipe('salad');
+//=============================================================================
 
-getRecipe('fried chicken');
+
+const get
+
+
+
+// select input  and get value from it 
+$('Button').on('click',   function(){
+    let inputValue = $('INPUT VALUE').val()
+    getRecipe(inputValue);
+
+
+})
+
 })
 
 
