@@ -49,7 +49,7 @@ $(document).ready(function() {
         })
     }
 
-getRecipe('Mac and cheese');
+getRecipe('fried chicken');
 })
 
 
