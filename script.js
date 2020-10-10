@@ -24,7 +24,9 @@ $(document).ready(function() {
 
 
 // ============================================================================
-if (localStorage.getItem('searchedFoodItem') === null)
+if (localStorage.getItem('searchedFoodItem') === null) {
+    localStorage.setItem('searchedFoodItem', [])
+}
 
 
 
@@ -69,10 +71,10 @@ if (localStorage.getItem('searchedFoodItem') === null)
         })
     }
 getRecipe('salad');
-//=============================================================================
+// =============================================================================
 
 
-const get
+// const get
 
 
 
