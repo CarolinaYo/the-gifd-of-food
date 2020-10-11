@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 
 
-    // ============================================================================
+    // ==================| SETTING UP LOCAL STORAGE |===============================
     if (localStorage.getItem('searchedFoodItem') === null) {
         localStorage.setItem('searchedFoodItem', '[]')
     }
@@ -76,10 +76,11 @@ $(document).ready(function() {
 
             let localArray = [];
             response.meals.forEach(meal => {
-
+                // setting some arrays up to handle data structure to be used later
                 let mealName = [meal.strMeal];
                 let ingredientsArray = [];
 
+                // Creating an object to contain data i want to use later
                 let recipeObject = {
                     name: meal.strMeal,
                     thumbnail: meal.strMealThumb,
@@ -87,53 +88,68 @@ $(document).ready(function() {
                 }; 
 
 
+                // loops through all the data properties that conatian ingredients and measerments
                 for (var i =  1; i  <= 20 ; i++) {
-
+                    // creating vars to use a check to see if the contain info or not
                     let testForIngredients = 'strIngredient' + i;
                     let testForAmount = 'strMeasure' + i
+                    // var to stor value if its not empty
                     let ingredient = '';
 
+                    // checking if the object properties have any value;
                     if ( meal.hasOwnProperty(testForIngredients) && meal[testForIngredients] !== '' && meal[testForIngredients] !== null ) {
-
+                        // If they do add them to a var and push that to an array that conatins all the ingredients form other properties
                         ingredient = `${meal[testForIngredients]} ${meal[testForAmount]}`
                         ingredientsArray.push(ingredient);
                     }
                 }
 
+                // after checking al object properties for ingredients push to recipe obj
                 recipeObject.ingredients = ingredientsArray
+                // adding recipies object to mealName array 
                 mealName.push(recipeObject)
+                // pushing all the info for each seperate meal returned into an array that will be used for other events
                 localArray.push(mealName)
 
             })
-            let old_listOfMeals = JSON.parse( localStorage.getItem('listOfMeals') )
+
+
+            
+            //=======================================| DONE |=========================================================
+            // -- SET THE LOCAL STORAGE TO THE ARRAY CREATED THAT WAY WHEN YOU CLICK ON AN ITEM YOU CAN TARGET
+            //--  THAT ITEM IN THE ARRAY AND DISPLAY THE RECIPE INFO TO THE DOM-------------------------------|DONE
+            let old_listOfMeals = JSON.parse( localStorage.getItem('listOfMeals') ) // MAYBE not useful here but in the function to loop through list items on the dom
             let new_listOfMeals = JSON.stringify(localArray);
             localStorage.setItem('listOfMeals', new_listOfMeals)
 
             console.log(localArray);
 
-            //================================================================================================
-            // -- SET THE LOCAL STORAGE TO THE ARRAY CREATED THAT WAY WHEN YOU CLICK ON AN ITEM YOU CAN TARGET
-            //--  THAT ITEM IN THE ARRAY AND DISPLAY THE RECIPE INFO TO THE DOM-------------------------------
 
-            //----------------------------------------THIS WILL BE A FUNCTION OUTSIDE OF API CALL------------------------------------
-                //  so you can have an event listener that will will grab that items value based on the text and than search the 
-                // local storage object if there is a match than display that matching objects info to the user 
-                    // example of an item in local storage array ['meal name', {object containing the recipe info} ] 
-                    // if clicked on a list item with the value of 'meal name' capture that value and loop through local 
-                    //  storage find a match and than use that objects data to display the correct info 
-                    // li on click run fuction that test local storage for that item
-                    //  let recipeArray = JSON.parse(localStorage.getItem('storedArray')) 
-                    // if (listItems value === recipeArray[0]) {  
-                        // display info for recipeArray[1]  which equals the stored data of the recipe for that meal name.
-                    //}
-            // ----------------------------------------------------------------------------------------------------------------------
-
-
-
-
-            // ================================================================================================
+            //===================| CALL FUNCTION HERE TO DISPLAY ALL ITEMS RECIVED FROM AJAX CALL  | ====================
             //------------------put function to display the all the possible meals here.-----------------------
             // a function that will loop through all the items in localArray and display a list to the user
+            // =======================================| PSEUDO CODE BELOW |==============================================
+
+
+            
+            //----------------------------------------THIS FUNCTION WILL BE BUILT OUTSIDE OF API CALL------------------------------------
+                //  Need a function handle displaying all the items in the array built above 
+                    // example of an item in the array ['meal name', {object containing the recipe info} ] 
+                    // display the name like in the example as shown above the recipes meal name would be... 'meal name'
+                    // you can also add other data too like thumbnal if you choose
+                    // storage array containg all the items from the ajax call then loop through until you find a match and 
+                    // than use that objects data to display the correct  recipe info 
+                        // like an to be clicked on later to run a fuction that test local storage for that item
+                        //_________________________________________________________________________________________
+                        //   ---- Below is an example of why we deal with the data the way we are-----------
+                            // in the next function to actually display the recipe info......
+                            //  let recipeArray = JSON.parse(localStorage.getItem('storedArray')) 
+                            // inside of a for loop or forEach() function loop through get right data
+                            // if (listItems value === recipeArray[0]) {  
+                                // display info for recipeArray[1]  which equals the stored data of the recipe for that meal name.
+                            //}
+                                // than handle all the required code to create elements and update the DOM
+            // ----------------------------------------------------------------------------------------------------------------------
 
         })
         .then(function() {
@@ -169,13 +185,20 @@ $(document).ready(function() {
     // =============================================================================
 
 
+
+
+
+
+
+
     //===============================================================================
     // -------------- FUNCTION TO UPDATE DOM WITH A SLIDER OF GIFY IMG'S -------------
 
     // This function takes an array as an argument
     const createSlider = array => {
+        // Setting up 
         let unorderdListItem = $('<ul>');
-        unorderdListItem.empty();
+        $('#gify-slider').empty();
         unorderdListItem.addClass('uk-slider-items uk-child-width-1-3@s uk-child-width-1-4@')
 
         // loops through each array item and create an Img element with the stored url I want to use 
@@ -195,11 +218,15 @@ $(document).ready(function() {
             // Appends the listItem containing the img created all to the ul in the html document.
             unorderdListItem.append(listItemEl);
         })
-        $('#gify-slider'). append(unorderdListItem);
+        $('#gify-slider').append(unorderdListItem);
     }
     //===============================================================================
 
 
+
+
+
+//----------------EXAMPLE OF THE EVENT HANDLER FUNCTION FOR GETTING A RECIPE--------------
     // select input  and get value from it 
     $('Button').on('click',   function(){
         let inputValue = $('INPUT VALUE').val()
