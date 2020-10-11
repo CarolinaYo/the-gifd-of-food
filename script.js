@@ -3,22 +3,22 @@ $(document).ready(function() {
 
     //=============================================================================
     //---------------JS required for swiper element---------------
-    // var swiper = new Swiper('.swiper-container', {
-    //     effect: 'coverflow',
-    //     grabCursor: true,
-    //     centeredSlides: true,
-    //     slidesPerView: 'auto',
-    //     coverflowEffect: {
-    //     rotate: 50,
-    //     stretch: 0,
-    //     depth: 100,
-    //     modifier: 1,
-    //     slideShadows: true,
-    //     },
-    //     pagination: {
-    //         el: '.swiper-pagination',
-    //     },
-    // });
+    var swiper = new Swiper('.swiper-container', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
     //=============================================================================
 
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
                     // var to stor value if its not empty
                     let ingredient = '';
 
-                    // checking if the object properties have any value;
+                    // checking if the object properties that conatin ingredients have any value.
                     if ( meal.hasOwnProperty(testForIngredients) && meal[testForIngredients] !== '' && meal[testForIngredients] !== null ) {
                         // If they do add them to a var and push that to an array that conatins all the ingredients form other properties
                         ingredient = `${meal[testForIngredients]} ${meal[testForAmount]}`
@@ -167,16 +167,17 @@ $(document).ready(function() {
                 // log to check if I target what I exepected
                 // console.log(gifyArray);
 
-                // Calling the function to actully creat the slider
-                createSlider(gifyArray)
+                // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
+                // Calling the function to actully create the slider
+                // createSlider(gifyArray)
 
                 // // Updating slider with gify response ¯\_(ツ)_/¯....
-                // $('.swiper-slide').each(function( index ){
+                $('.swiper-slide').each(function( index ){
 
-                //     $(this).css("background-image", "url(" + gifyResponse.data[index].images.original.url + ")");
+                    $(this).css("background-image", "url(" + gifyResponse.data[index].images.original.url + ")");
 
-                //     // console.log(gifyResponse.data[index].images.original.url);
-                // })
+                    // console.log(gifyResponse.data[index].images.original.url);
+                })
 
             })
         })
@@ -191,35 +192,35 @@ $(document).ready(function() {
 
 
 
-    //===============================================================================
+    //==========================| CREAT UK SLIDER |=====================================================
     // -------------- FUNCTION TO UPDATE DOM WITH A SLIDER OF GIFY IMG'S -------------
 
     // This function takes an array as an argument
-    const createSlider = array => {
-        // Setting up 
-        let unorderdListItem = $('<ul>');
-        $('#gify-slider').empty();
-        unorderdListItem.addClass('uk-slider-items uk-child-width-1-3@s uk-child-width-1-4@')
+    // const createSlider = array => {
+    //     // Setting up 
+    //     let unorderdListItem = $('<ul>');
+    //     $('#gify-slider').empty();
+    //     unorderdListItem.addClass('uk-slider-items uk-child-width-1-3@s uk-child-width-1-4@')
 
-        // loops through each array item and create an Img element with the stored url I want to use 
-        array.forEach(item => {
-            // Creating jquery img element
-            let imgEL = $('<img>');
-            // Create a list item to append to ul on the dom.
-            let listItemEl = $('<li>').css({'width': '200px', 'margin': '2.5px'});
-            // create a var to store this array items orginal url 
-            let imageUrl = item.images.fixed_width.url
-            // check its value to make sure its what I want 
-            // console.log(imageUrl);
-            // Once I know what what url is set the attr value with stored var and set other styles after 
-            imgEL.attr('src', imageUrl).attr('alt', 'funny gif about the food').css({'width': '200px', 'height': '200px'});
-            // appends img to the listItem created 
-            listItemEl.append(imgEL);
-            // Appends the listItem containing the img created all to the ul in the html document.
-            unorderdListItem.append(listItemEl);
-        })
-        $('#gify-slider').append(unorderdListItem);
-    }
+    //     // loops through each array item and create an Img element with the stored url I want to use 
+    //     array.forEach(item => {
+    //         // Creating jquery img element
+    //         let imgEL = $('<img>');
+    //         // Create a list item to append to ul on the dom.
+    //         let listItemEl = $('<li>').css({'width': '200px', 'margin': '2.5px'});
+    //         // create a var to store this array items orginal url 
+    //         let imageUrl = item.images.fixed_width.url
+    //         // check its value to make sure its what I want 
+    //         // console.log(imageUrl);
+    //         // Once I know what what url is set the attr value with stored var and set other styles after 
+    //         imgEL.attr('src', imageUrl).attr('alt', 'funny gif about the food').css({'width': '200px', 'height': '200px'});
+    //         // appends img to the listItem created 
+    //         listItemEl.append(imgEL);
+    //         // Appends the listItem containing the img created all to the ul in the html document.
+    //         unorderdListItem.append(listItemEl);
+    //     })
+    //     $('#gify-slider').append(unorderdListItem);
+    // }
     //===============================================================================
 
 
@@ -228,12 +229,12 @@ $(document).ready(function() {
 
 //----------------EXAMPLE OF THE EVENT HANDLER FUNCTION FOR GETTING A RECIPE--------------
     // select input  and get value from it 
-    $('Button').on('click',   function(){
-        let inputValue = $('INPUT VALUE').val()
-        getRecipe(inputValue);
+    // $('Button').on('click',   function(){
+    //     let inputValue = $('INPUT VALUE').val()
+    //     getRecipe(inputValue);
 
 
-    })
+    // })
 
 })
 
