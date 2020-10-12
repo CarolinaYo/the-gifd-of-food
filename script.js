@@ -24,8 +24,8 @@ $(document).ready(function() {
 
 
     // ==================| SETTING UP LOCAL STORAGE |===============================
-    if (localStorage.getItem('searchedFoodItem') === null) {
-        localStorage.setItem('searchedFoodItem', '[]')
+    if (localStorage.getItem('activeRecipe') === null) {
+        localStorage.setItem('activeRecipe', '[]')
     }
     if (localStorage.getItem('listOfMeals') === null ) {
         localStorage.setItem('listOfMeals', '[]')
