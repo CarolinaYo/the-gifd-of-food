@@ -156,18 +156,7 @@ $(document).ready(function() {
 
 
                 })
-
-                // <div class="uk-flex-middle" uk-grid>
-                //     <div class="uk-width-2-3@m">
-                //         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
-                //     </div>
-                //     <div class="uk-width-1-3@m uk-flex-first">
-                //         <img src="images/light.jpg" alt="Image">
-                //     </div>
-                // </div>
-    
-    
-                
+                 
                 //----------------------------------------THIS FUNCTION WILL BE BUILT OUTSIDE OF API CALL------------------------------------
                     //  Need a function handle displaying all the items in the array built above 
                         // example of an item in the array ['meal name', {object containing the recipe info} ] 
