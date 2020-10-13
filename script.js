@@ -24,8 +24,8 @@ $(document).ready(function() {
 
 
     // ==================| SETTING UP LOCAL STORAGE |===============================
-    if (localStorage.getItem('searchedFoodItem') === null) {
-        localStorage.setItem('searchedFoodItem', '[]')
+    if (localStorage.getItem('activeRecipe') === null) {
+        localStorage.setItem('activeRecipe', '[]')
     }
     if (localStorage.getItem('listOfMeals') === null ) {
         localStorage.setItem('listOfMeals', '[]')
@@ -135,7 +135,7 @@ $(document).ready(function() {
                 // =======================================| PSEUDO CODE BELOW |==============================================
                 
                 localArray.forEach(item => {
-                    let parentDivEl = $('<div>').addClass('uk-flex-middle uk-grid');
+                    let parentDivEl = $('<div>').addClass('uk-flex-middle uk-grid recipe-div');
                     let childDivNameEl = $('<div>').addClass('uk-width-2-3@m');
                     let childDivImageEl = $('<div>').addClass('uk-width-1-3@m uk-flex-first');
                     let thumbnailImageEl = $('<img>').css({'width': '50px', 'height': '50px'});
@@ -265,6 +265,7 @@ $(document).ready(function() {
     // }
     //===============================================================================
 
+  
 
 
 
@@ -286,5 +287,26 @@ $(document).ready(function() {
 
 })
 
+$('#meal-container').on('click', 'div.recipe-div', function() {
+    let mealText = $(this).text();
+
+    console.log(mealText);
+    console.log('-----');
+
+    let recipeArray = JSON.parse(localStorage.getItem('listOfMeals'));
+    let recipeToStore =  JSON.parse(localStorage.getItem('activeRecipe'))
+
+    recipeArray.forEach(recipe => {
+        if (mealText === recipe[0] ) {
+            console.log(recipe[1]);
+            
+            
+            recipeToStore = recipe;
+            
+        }
+    })
+    localStorage.setItem( 'activeRecipe', JSON.stringify(recipeToStore) )
+    
+})
 
 
