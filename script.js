@@ -92,17 +92,17 @@ $(document).ready(function() {
                     }; 
     
     
-                    // loops through all the data properties that conatian ingredients and measerments
+                    // loops through all the data properties that contain ingredients and measurements
                     for (var i =  1; i  <= 20 ; i++) {
-                        // creating vars to use a check to see if the contain info or not
+                        // creating vars to use a check to see if they contain info or not
                         let testForIngredients = 'strIngredient' + i;
                         let testForAmount = 'strMeasure' + i
                         // var to stor value if its not empty
                         let ingredient = '';
     
-                        // checking if the object properties that conatin ingredients have any value.
+                        // checking if the object properties that contain ingredients have any value.
                         if ( meal.hasOwnProperty(testForIngredients) && meal[testForIngredients] !== '' && meal[testForIngredients] !== null ) {
-                            // If they do add them to a var and push that to an array that conatins all the ingredients form other properties
+                            // If they do add them to a var and push that to an array that conatins all the ingredients from other properties
                             ingredient = `${meal[testForIngredients]} ${meal[testForAmount]}`
                             ingredientsArray.push(ingredient);
                         }
