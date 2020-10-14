@@ -12,7 +12,32 @@
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-    <div class="swiper-container">
+    <div style="width: 80%;margin: 2rem auto;">
+        <div class="uk-text-center" uk-grid>
+            <div class="uk-width-1-1">
+                <div class="uk-card uk-card-default uk-card-body">
+                    <form class="uk-form-stacked">
+                        <label class="uk-form-label" for="form-stacked-text">Find a Recipe</label>
+                        <div class="uk-margin" uk-margin>
+                            <div uk-form-custom="target: true">
+                                <input id="meal-item" class="uk-input uk-form-width-large" type="text" placeholder="Enter a meal">
+                            </div>
+                            <button id="searchBtn" class="uk-button uk-button-default"> <span uk-icon="search"></span> Search</button>
+                        </div>      
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="meal-container" style="width: 80%; margin: 2rem auto; display: none;">
+        <div class="uk-text-center" uk-grid>
+            <div class="uk-width-1-1">
+                <div id="meal-list" class="uk-card uk-card-default uk-card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-container" style="visibility: hidden;">
         <div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
             <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
