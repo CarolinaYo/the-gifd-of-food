@@ -40,6 +40,50 @@ $(document).ready(function() {
     // ----------------- CREATE A FUNCTION TO DISPLAY SELECTED RECIPE----------------
 
     // Declare function that takes an argument called recipeObj
+    function recipeObj(){
+        
+           
+        if (localStorage.getItem('activeRecipe') !==null){
+
+            var recipeData= JSON.parse(localStorage.getItem("activeRecipe"));
+
+            var recipeImage = $("<div class = 'recipeImage'>");
+            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail).css({"width":"250px","height":"250px"});
+
+            // console.log(recipeImage);
+
+            $(".recipePic").append(recipeImage);
+            
+            
+            var recipeName = $("<h1>").text(recipeData[0]);
+
+            $("#recipeName").append(recipeName);
+
+            
+            var ingredients = recipeData[1].ingredients;
+            // console.log(ingredients);
+            for (var i=0; i<ingredients.length; i++){
+                console.log(i);
+                var li = $("<li>").text(ingredients[i]);
+                $(".ingredients").append(li);
+            }
+            
+            var instruction = recipeData[1].instrustion;
+            var pInstruction = $("<p>").text(instruction);
+            $(".instructionContainer").append(pInstruction);
+
+
+
+        }
+    
+        
+    
+        
+        var instruction = $("<div class = 'instructions'>");
+    }
+
+    recipeObj();
+
         // Inside the function create the elements required to put the container together 
         // Example div.(main-container), img.(img-thumbnail), ul.(contain-ingrentes) p.(instructions)
         // After you create the elements set the required values 
