@@ -111,9 +111,9 @@ $(document).ready(function() {
                     // after checking al object properties for ingredients push to recipe obj
                     recipeObject.ingredients = ingredientsArray
                     // adding recipies object to mealName array 
-                    mealName.push(recipeObject)
+                    mealName.push(recipeObject);
                     // pushing all the info for each seperate meal returned into an array that will be used for other events
-                    localArray.push(mealName)
+                    localArray.push(mealName);
     
                 })
     
@@ -124,7 +124,7 @@ $(document).ready(function() {
                 //--  THAT ITEM IN THE ARRAY AND DISPLAY THE RECIPE INFO TO THE DOM-------------------------------|DONE
                 let old_listOfMeals = JSON.parse( localStorage.getItem('listOfMeals') ) // MAYBE not useful here but in the function to loop through list items on the dom
                 let new_listOfMeals = JSON.stringify(localArray);
-                localStorage.setItem('listOfMeals', new_listOfMeals)
+                localStorage.setItem('listOfMeals', new_listOfMeals);
     
                 console.log(localArray);
     
@@ -145,13 +145,13 @@ $(document).ready(function() {
                     let mealThumbnail = item[1].thumbnail;
 
                     console.log(mealName, mealThumbnail);
-                    mealNamParagraghEl.text(mealName)
+                    mealNamParagraghEl.text(mealName);
                     thumbnailImageEl.attr('src', mealThumbnail);
                     childDivImageEl.append(thumbnailImageEl);
                     childDivNameEl.append(mealNamParagraghEl);
-                    parentDivEl.append(childDivNameEl,childDivImageEl)
+                    parentDivEl.append(childDivNameEl,childDivImageEl);
 
-                    $('#meal-list').append(parentDivEl,$('<hr>'))
+                    $('#meal-list').append(parentDivEl,$('<hr>'));
 
 
 
@@ -164,7 +164,7 @@ $(document).ready(function() {
                         // you can also add other data too like thumbnal if you choose
                         // storage array containg all the items from the ajax call then loop through until you find a match and 
                         // than use that objects data to display the correct  recipe info 
-                            // like an to be clicked on later to run a fuction that test local storage for that item
+                            // like an event to be clicked on later to run a fuction that test local storage for that item
                             //_________________________________________________________________________________________
                             //   ---- Below is an example of why we deal with the data the way we are-----------
                                 // in the next function to actually display the recipe info......
@@ -177,8 +177,8 @@ $(document).ready(function() {
                 // ----------------------------------------------------------------------------------------------------------------------
     
             }  else if ($('#meal-item').hasClass('uk-form-success')){
-                $('#meal-item').removeClass('uk-form-success')
-                $('#meal-item').addClass('uk-form-danger')
+                $('#meal-item').removeClass('uk-form-success');
+                $('#meal-item').addClass('uk-form-danger');
             }
 
 
@@ -262,14 +262,15 @@ $(document).ready(function() {
 //----------------EXAMPLE OF THE EVENT HANDLER FUNCTION FOR GETTING A RECIPE--------------
     // select input  and get value from it 
     $('#searchBtn').on('click',   function(event){
-        event.preventDefault()
-        let inputValue = $('#meal-item').val()
+        event.preventDefault();
+        let inputValue = $('#meal-item').val();
 
         console.log(inputValue);
         getRecipe(inputValue);
+
         $('.swiper-container').css('visibility', 'visible');
         $('#meal-container').css('display', 'block');
-        $('#meal-list').empty()
+        $('#meal-list').empty();
 
 
     })
@@ -287,6 +288,7 @@ $('#meal-container').on('click', 'div.recipe-div', function() {
 
     recipeArray.forEach(recipe => {
         if (mealText === recipe[0] ) {
+
             console.log(recipe[1]);
             
             
@@ -294,7 +296,7 @@ $('#meal-container').on('click', 'div.recipe-div', function() {
             
         }
     })
-    localStorage.setItem( 'activeRecipe', JSON.stringify(recipeToStore) )
+    localStorage.setItem( 'activeRecipe', JSON.stringify(recipeToStore) );
     
 })
 
