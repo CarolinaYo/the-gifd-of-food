@@ -161,15 +161,9 @@ $(document).ready(function() {
                     //  Need a function handle displaying all the items in the array built above 
                         // example of an item in the array ['meal name', {object containing the recipe info} ] 
                         // display the name like in the example as shown above the recipes meal name would be... 'meal name'
-<<<<<<< HEAD
                         // you can also add other data too like thumbnal if you choose
                         // storage array containg all the items from the ajax call then loop through until you find a match and 
                         // than use that objects data to display the correct  recipe info 
-=======
-                        // you can also add other data too like thumbnail if you choose
-                        // storage array containing all the items from the ajax call then loop through until you find a match and 
-                        // then use that objects data to display the correct  recipe info 
->>>>>>> 6df8e1479d213583177dfa45da367c0abb308e73
                             // like an event to be clicked on later to run a fuction that test local storage for that item
                             //_________________________________________________________________________________________
                             //   ---- Below is an example of why we deal with the data the way we are-----------
