@@ -42,18 +42,18 @@ $(document).ready(function() {
     // Declare function that takes an argument called recipeObj
         // Inside the function create the elements required to put the container together 
         // Example div.(main-container), img.(img-thumbnail), ul.(contain-ingrentes) p.(instructions)
-        // After you create the elements set the requierd values 
+        // After you create the elements set the required values 
         // I will set the data up...
         //  in way that if there is more than one item It will be an array so you can use 
-        //  recipeObj.(array-name).forEach(item => { create elemtn and append to parent element})
+        //  recipeObj.(array-name).forEach(item => { create element and append to parent element})
 
         // dataStructure for the selected recipe will be an array with two values the name will be array[0]
-        // the object containg the recipe inffo will be array[1] so target the values of array[1] in object like form 
-        // example store data like let  recipeData = array[1] 
-            // let mealTitile = recipeData.name
+        // the object containg the recipe info will be array[1] so target the values of array[1] in object like form 
+        // example store data like let recipeData = array[1] 
+            // let mealTitle = recipeData.name
             // recipeData.name
             // recipeData.thumbnail
-            // recipeData.instrustion
+            // recipeData.instruction
             // recipeData.ingredients --- returns an array you will have to loop through each one and update.
 
 
@@ -108,7 +108,7 @@ $(document).ready(function() {
                         }
                     }
     
-                    // after checking al object properties for ingredients push to recipe obj
+                    // after checking all object properties for ingredients push to recipe object
                     recipeObject.ingredients = ingredientsArray
                     // adding recipies object to mealName array 
                     mealName.push(recipeObject)
@@ -161,10 +161,10 @@ $(document).ready(function() {
                     //  Need a function handle displaying all the items in the array built above 
                         // example of an item in the array ['meal name', {object containing the recipe info} ] 
                         // display the name like in the example as shown above the recipes meal name would be... 'meal name'
-                        // you can also add other data too like thumbnal if you choose
-                        // storage array containg all the items from the ajax call then loop through until you find a match and 
-                        // than use that objects data to display the correct  recipe info 
-                            // like an to be clicked on later to run a fuction that test local storage for that item
+                        // you can also add other data too like thumbnail if you choose
+                        // storage array containing all the items from the ajax call then loop through until you find a match and 
+                        // then use that objects data to display the correct  recipe info 
+                            // like an event to be clicked on later to run a fuction that test local storage for that item
                             //_________________________________________________________________________________________
                             //   ---- Below is an example of why we deal with the data the way we are-----------
                                 // in the next function to actually display the recipe info......
@@ -195,11 +195,11 @@ $(document).ready(function() {
 
                 // create an array for all the objects in the gifyResponse.data array
                 let gifyArray = gifyResponse.data;
-                // log to check if I target what I exepected
+                // log to check if I target what I expected
                 // console.log(gifyArray);
 
                 // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
-                // Calling the function to actully create the slider
+                // Calling the function to actually create the slider
                 // createSlider(gifyArray)
 
                 // // Updating slider with gify response ¯\_(ツ)_/¯....
