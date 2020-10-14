@@ -43,6 +43,7 @@ $(document).ready(function() {
     // Declare function that takes an argument called recipeObj
     function recipeObj(){
         var recipeImage = $("<div class = 'recipeImage'>");
+        
         var recipeName = $("<div class= 'recipeName'>");
         var ingredients = $("<div class= 'ingredients'>");
         var instruction = $("<div class = 'instructions'>");
