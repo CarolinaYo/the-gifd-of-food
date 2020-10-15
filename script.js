@@ -185,7 +185,7 @@ $(document).ready(function () {
         })
             .then(function () {
                 // Get a gify
-                
+
                 $.ajax({
                     url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${mealInput}&offset=0&rating=g&lang=en`,
                     method: 'GET'
@@ -204,7 +204,7 @@ $(document).ready(function () {
 
                     // // Updating slider with gify response ¯\_(ツ)_/¯....
                     // Array to store 10 unique random numbers from 0-50
-                    let limit = createUniqueNumbers(50,10);
+                    let limit = createUniqueNumbers(50, 10);
                     $('.swiper-slide').each(function (index) {
                         // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
                         $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
@@ -265,36 +265,36 @@ $(document).ready(function () {
     // only works if amount is === or lager than the max number.
     const createUniqueNumbers = (maxNum, amount) => {
         // Checking if the too make sure there will not be an ifinit loop
-        if ( maxNum >= amount ) {
+        if (maxNum >= amount) {
 
             // function for creating a random number from an arg that is the limit.
             const getRandomNumber = limit => {
                 let num = Math.floor(Math.random() * limit)
                 return num;
             }
-    
+
             // Array to store randomly generated numbers.
             let numberList = [];
             console.log(numberList, ' =====');
 
             // For loop to make sure you create numbers until you meat the amount called for.
-            for (var i = 0; i < amount ; i++) {
+            for (var i = 0; i < amount; i++) {
                 console.log(i);
                 // Var for storing a random number
                 let randomNum = getRandomNumber(maxNum);
                 // Check for seeing if the number already exists.
                 let checkNumberList = true;
-    
+
                 // If the i is greater than 0 meaning only loop throgh the numberlist array if it has a value.
-                if ( i > 0 ) {
+                if (i > 0) {
                     // Loop through number list array to do ...
                     numberList.forEach(num => {
                         // check if the numebr is already in the arrray 
-                        if (randomNum === num){
+                        if (randomNum === num) {
                             // If the check passes cancel out the increment for i and set the check to false.
                             checkNumberList = false;
                             i--;
-                        } 
+                        }
                     })
                 }
                 // If the number generated was unique and not already in the array add the new number.
@@ -305,7 +305,7 @@ $(document).ready(function () {
             }
             return numberList
             // returning an error to let them know the problem
-        }else {
+        } else {
             return 'Error you broke my code! :(   jk I checked for that ;)'
         }
 
