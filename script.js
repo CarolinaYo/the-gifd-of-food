@@ -69,7 +69,7 @@ $(document).ready(function() {
             }
             
             var instruction = recipeData[1].instruction;
-            var pInstruction = $("<p>").text(instruction);
+            var pInstruction = $("<p>").text(instructions);
             $(".instructionContainer").append(pInstruction);
 
 
