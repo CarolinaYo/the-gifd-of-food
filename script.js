@@ -374,12 +374,19 @@ $(document).ready(function () {
 
     }
 
+    const blinkGreen = () => {
+        $('nav button').addClass('blink-green');
+        setTimeout(function(){ 
+            $('nav button').removeClass('blink-green')
+         }, 200);
+    }
+
 
 
 
     //----------------EXAMPLE OF THE EVENT HANDLER FUNCTION FOR GETTING A RECIPE--------------
     // select input  and get value from it 
-    $('#searchBtn').on('click', function (event) {
+    $('#searchBtn').on('click', function(event) {
         event.preventDefault();
         let inputValue = $('#meal-item').val();
 
@@ -419,7 +426,7 @@ $(document).ready(function () {
     
     // Event listener on a saveRecipe button to save Curently displayed recipe to the 
     // localStorage object that conatins the saved recipes
-    $('#saveRecipe').on('click', function(){
+    $('#saveRecipe').on('click', function() {
         let activeRecipe = JSON.parse(localStorage.getItem('activeRecipe'));
         let old_myCookBook = JSON.parse(localStorage.getItem('myCookBook'));
     
@@ -432,11 +439,15 @@ $(document).ready(function () {
     
         if (testRecipe === true) {
             old_myCookBook.push(activeRecipe)
+            blinkGreen();
         }
     
         let new_myCookBook = JSON.stringify(old_myCookBook);
         localStorage.setItem('myCookBook', new_myCookBook);
+        
     })
+    
+
 
 })
 
