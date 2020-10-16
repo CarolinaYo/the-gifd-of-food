@@ -210,10 +210,11 @@ $(document).ready(function () {
                 // =======================================| PSEUDO CODE BELOW |==============================================
 
                 localArray.forEach(item => {
+                    let recipeHtmlLink = $('<a>').attr('href', 'recipe.html')
                     let parentDivEl = $('<div>').addClass('uk-flex-middle uk-grid recipe-div');
                     let childDivNameEl = $('<div>').addClass('uk-width-2-3@m');
                     let childDivImageEl = $('<div>').addClass('uk-width-1-3@m uk-flex-first');
-                    let thumbnailImageEl = $('<img>').css({ 'width': '50px', 'height': '50px' });
+                    let thumbnailImageEl = $('<img>').css({ 'width': '70px', 'height': '70px' });
                     let mealNamParagraghEl = $('<p>').addClass('uk-text-lead')
 
                     let mealName = item[0];
@@ -225,8 +226,9 @@ $(document).ready(function () {
                     childDivImageEl.append(thumbnailImageEl);
                     childDivNameEl.append(mealNamParagraghEl);
                     parentDivEl.append(childDivNameEl, childDivImageEl);
+                    recipeHtmlLink.append(parentDivEl);
 
-                    $('#meal-list').append(parentDivEl, $('<hr>'));
+                    $('#meal-list').append(recipeHtmlLink, $('<hr>'));
 
 
 
