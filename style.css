@@ -26,13 +26,15 @@ body {
   width: 20%;
   height: auto;
 }
-/* Dania Tests CSS Below */
-.border {
-  border: dashed black 1px;
-}
 
+/* Selma CSS */
 body {
   background-image: url("./Assets/background_lower.jpg");
   background-size: auto;
   background-position: center;
+}
+
+.members {
+  padding-left: 150px;
+  padding-right: 150px;
 }
