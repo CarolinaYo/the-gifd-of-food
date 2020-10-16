@@ -19,6 +19,15 @@ nav button {
   border: none !important;
 }
 
+
+/* _________________________________STYLES FOR RECIPE.HTML______________________________ */
+.recipePic img {
+  width: 90%;
+  height: auto;
+  padding-top: 61px;
+}
+
+
 .swiper-container {
   width: 100%;
   height: 20%;
