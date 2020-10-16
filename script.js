@@ -232,24 +232,6 @@ $(document).ready(function () {
 
                 })
 
-                //----------------------------------------THIS FUNCTION WILL BE BUILT OUTSIDE OF API CALL------------------------------------
-                //  Need a function handle displaying all the items in the array built above 
-                // example of an item in the array ['meal name', {object containing the recipe info} ] 
-                // display the name like in the example as shown above the recipes meal name would be... 'meal name'
-                // you can also add other data too like thumbnal if you choose
-                // storage array containg all the items from the ajax call then loop through until you find a match and 
-                // than use that objects data to display the correct  recipe info 
-                // like an event to be clicked on later to run a fuction that test local storage for that item
-                //_________________________________________________________________________________________
-                //   ---- Below is an example of why we deal with the data the way we are-----------
-                // in the next function to actually display the recipe info......
-                //  let recipeArray = JSON.parse(localStorage.getItem('storedArray')) 
-                // inside of a for loop or forEach() function loop through get right data
-                // if (listItems value === recipeArray[0]) {  
-                // display info for recipeArray[1]  which equals the stored data of the recipe for that meal name.
-                //}
-                // than handle all the required code to create elements and update the DOM
-                // ----------------------------------------------------------------------------------------------------------------------
 
             } else if ($('#meal-item').hasClass('uk-form-success')) {
                 $('#meal-item').removeClass('uk-form-success');
@@ -290,7 +272,7 @@ $(document).ready(function () {
                 })
             })
     }
-    // getRecipe('soup');
+
     // =============================================================================
 
 
