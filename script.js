@@ -40,12 +40,86 @@ $(document).ready(function () {
     // ----------------- CREATE A FUNCTION TO DISPLAY SELECTED RECIPE----------------
 
     // Declare function that takes an argument called recipeObj
+
+    function recipeObj(){
+        
+           
+        if (localStorage.getItem('activeRecipe') !==null){
+
+            var recipeData= JSON.parse(localStorage.getItem("activeRecipe"));
+
+            var recipeImage = $("<div class = 'recipeImage'>");
+            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail).css({"width":"300px","height":"300px"});
+
+            // console.log(recipeImage);
+
+            $(".recipePic").append(recipeImage);
+            
+            
+            var recipeName = $("<h1>").text(recipeData[0]);
+
+            $("#recipeName").append(recipeName);
+
+            
+            var ingredients = recipeData[1].ingredients;
+            // console.log(ingredients);
+            for (var i=0; i<ingredients.length; i++){
+                console.log(i);
+                var li = $("<li>").text(ingredients[i]);
+                $(".ingredients").append(li);
+            }
+            
+            var instruction = recipeData[1].instruction;
+            var pInstruction = $("<p>").text(instruction);
+            $(".instructionContainer").append(pInstruction);
+
+
+
+        }
+        //Input? or random?------------------------------------
+        var mealInput = "hungry";
+        var limit = 10;
+            
+        $.ajax({
+            
+            url:`https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${ mealInput }&limit=${ limit }&offset=0&rating=g&lang=en`,
+            method: 'GET'
+        }).then(function(gifyResponse){
+            // Handle data
+            console.log(gifyResponse);
+
+            // create an array for all the objects in the gifyResponse.data array
+            let gifyArray = gifyResponse.data;
+            // log to check if I target what I expected
+            // console.log(gifyArray);
+
+            // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
+            // Calling the function to actually create the slider
+            // createSlider(gifyArray)
+
+            // // Updating slider with gify response ¯\_(ツ)_/¯....
+            $('.swiper-slide').each(function( index ){
+
+                $(this).css("background-image", "url(" + gifyResponse.data[index].images.original.url + ")");
+
+                // console.log(gifyResponse.data[index].images.original.url);
+            })
+
+        })
+    
+    
+    }
+
+    recipeObj();
+
+
     // Inside the function create the elements required to put the container together 
     // Example div.(main-container), img.(img-thumbnail), ul.(contain-ingrentes) p.(instructions)
     // After you create the elements set the required values 
     // I will set the data up...
     //  in way that if there is more than one item It will be an array so you can use 
     //  recipeObj.(array-name).forEach(item => { create element and append to parent element})
+
 
     // dataStructure for the selected recipe will be an array with two values the name will be array[0]
     // the object containg the recipe info will be array[1] so target the values of array[1] in object like form 
