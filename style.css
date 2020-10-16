@@ -13,6 +13,12 @@ body {
   min-height: 100%;
 }
 
+/*  ________________________STYLES FOR MY COOK BOOK  DROPDOWN MENU_______________________*/
+nav button {
+  height: 80px;
+  border: none !important;
+}
+
 .swiper-container {
   width: 100%;
   height: 20%;
@@ -38,3 +44,5 @@ body {
   padding-left: 150px;
   padding-right: 150px;
 }
+
+
