@@ -30,6 +30,9 @@ $(document).ready(function () {
     if (localStorage.getItem('listOfMeals') === null) {
         localStorage.setItem('listOfMeals', '[]')
     }
+    if (localStorage.getItem('myCookBook') === null) {
+        localStorage.setItem('myCookBook','[]')
+    }
     // ============================================================================
 
 
@@ -390,28 +393,50 @@ $(document).ready(function () {
 
     })
 
-})
-
-$('#meal-container').on('click', 'div.recipe-div', function () {
-    let mealText = $(this).text();
-
-    console.log(mealText);
-    console.log('-----');
-
-    let recipeArray = JSON.parse(localStorage.getItem('listOfMeals'));
-    let recipeToStore = JSON.parse(localStorage.getItem('activeRecipe'))
-
-    recipeArray.forEach(recipe => {
-        if (mealText === recipe[0]) {
-
-            console.log(recipe[1]);
-
-
-            recipeToStore = recipe;
-
-        }
+    $('#meal-container').on('click', 'div.recipe-div', function () {
+        let mealText = $(this).text();
+    
+        console.log(mealText);
+        console.log('-----');
+    
+        let recipeArray = JSON.parse(localStorage.getItem('listOfMeals'));
+        let recipeToStore = JSON.parse(localStorage.getItem('activeRecipe'))
+    
+        recipeArray.forEach(recipe => {
+            if (mealText === recipe[0]) {
+    
+                console.log(recipe[1]);
+    
+    
+                recipeToStore = recipe;
+    
+            }
+        })
+        localStorage.setItem('activeRecipe', JSON.stringify(recipeToStore));
+    
     })
-    localStorage.setItem('activeRecipe', JSON.stringify(recipeToStore));
+    
+    
+    // Event listener on a saveRecipe button to save Curently displayed recipe to the 
+    // localStorage object that conatins the saved recipes
+    $('#saveRecipe').on('click', function(){
+        let activeRecipe = JSON.parse(localStorage.getItem('activeRecipe'));
+        let old_myCookBook = JSON.parse(localStorage.getItem('myCookBook'));
+    
+        let testRecipe = true;
+        old_myCookBook.forEach(item => {
+            if (item[0] === activeRecipe[0]) {
+                testRecipe = false;
+            }
+        });
+    
+        if (testRecipe === true) {
+            old_myCookBook.push(activeRecipe)
+        }
+    
+        let new_myCookBook = JSON.stringify(old_myCookBook);
+        localStorage.setItem('myCookBook', new_myCookBook);
+    })
 
 })
 
