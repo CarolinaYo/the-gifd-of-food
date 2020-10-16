@@ -50,11 +50,11 @@ $(document).ready(function () {
             var recipeData= JSON.parse(localStorage.getItem("activeRecipe"));
 
             var recipeImage = $("<div class = 'recipeImage'>");
-            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail).css({"width":"300px","height":"300px"});
+            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail)//.css({"width":"300px","height":"300px"});
 
             // console.log(recipeImage);
 
-            $(".recipePic").append(recipeImage);
+            $(".recipePic").prepend(recipeImage);
             
             
             var recipeName = $("<h1>").text(recipeData[0]);
