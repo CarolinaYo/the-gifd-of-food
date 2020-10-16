@@ -42,6 +42,7 @@ $(document).ready(function () {
     // Declare function that takes an argument called recipeObj
 
     function recipeObj(){
+        let mealInput = ''
         
            
         if (localStorage.getItem('activeRecipe') !==null){
@@ -73,18 +74,15 @@ $(document).ready(function () {
             var pInstruction = $("<p>").text(instruction);
             $(".instructionContainer").append(pInstruction);
 
-
+            mealInput = recipeData[0];
 
         }
-        //Input? or random?------------------------------------
-        var mealInput = "hungry";
-        var limit = 10;
-            
+
+        
         $.ajax({
-            
-            url:`https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${ mealInput }&limit=${ limit }&offset=0&rating=g&lang=en`,
+            url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${mealInput}&offset=0&rating=g&lang=en`,
             method: 'GET'
-        }).then(function(gifyResponse){
+        }).then(function (gifyResponse) {
             // Handle data
             console.log(gifyResponse);
 
@@ -98,14 +96,17 @@ $(document).ready(function () {
             // createSlider(gifyArray)
 
             // // Updating slider with gify response ¯\_(ツ)_/¯....
-            $('.swiper-slide').each(function( index ){
-
-                $(this).css("background-image", "url(" + gifyResponse.data[index].images.original.url + ")");
+            // Array to store 10 unique random numbers from 0-50
+            let limit = createUniqueNumbers(50, 10);
+            $('.swiper-slide').each(function (index) {
+                // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+                $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
 
                 // console.log(gifyResponse.data[index].images.original.url);
             })
 
         })
+    
     
     
     }
