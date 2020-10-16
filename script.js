@@ -48,7 +48,7 @@ $(document).ready(function() {
             var recipeData= JSON.parse(localStorage.getItem("activeRecipe"));
 
             var recipeImage = $("<div class = 'recipeImage'>");
-            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail).css({"width":"250px","height":"250px"});
+            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail).css({"width":"300px","height":"300px"});
 
             // console.log(recipeImage);
 
@@ -68,18 +68,45 @@ $(document).ready(function() {
                 $(".ingredients").append(li);
             }
             
-            var instruction = recipeData[1].instrustion;
+            var instruction = recipeData[1].instruction;
             var pInstruction = $("<p>").text(instruction);
             $(".instructionContainer").append(pInstruction);
 
 
 
         }
+        //Input? or random?------------------------------------
+        var mealInput = "hungry";
+        var limit = 10;
+            
+        $.ajax({
+            
+            url:`https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${ mealInput }&limit=${ limit }&offset=0&rating=g&lang=en`,
+            method: 'GET'
+        }).then(function(gifyResponse){
+            // Handle data
+            console.log(gifyResponse);
+
+            // create an array for all the objects in the gifyResponse.data array
+            let gifyArray = gifyResponse.data;
+            // log to check if I target what I expected
+            // console.log(gifyArray);
+
+            // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
+            // Calling the function to actually create the slider
+            // createSlider(gifyArray)
+
+            // // Updating slider with gify response ¯\_(ツ)_/¯....
+            $('.swiper-slide').each(function( index ){
+
+                $(this).css("background-image", "url(" + gifyResponse.data[index].images.original.url + ")");
+
+                // console.log(gifyResponse.data[index].images.original.url);
+            })
+
+        })
     
-        
     
-        
-        var instruction = $("<div class = 'instructions'>");
     }
 
     recipeObj();
