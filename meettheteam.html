@@ -15,15 +15,24 @@
     <nav class="uk-navbar-container uk-dark" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
-                <li class="uk-parent"></li><a href="" class="uk-navbar-item uk-logo">The Gifd of Food</a></li>
+                <li class="uk-active"></li><a href="" class="uk-navbar-item uk-logo">The Gifd of Food</a></li>
                 <li class="uk-parent">
-                    <a href="#">
-                        <span class="uk-icon uk-margin-small-right" uk-icon="icon: star"></span>
-                        My Cookbook
-                    </a>
+                    <button class="uk-button uk-button-default" type="button"><span
+                            class="uk-icon uk-margin-small-right" uk-icon="icon: star"></span>
+                        My Cookbook</button>
+                    <div uk-dropdown>
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li class="uk-active"><a href="#">Active</a></li>
+                            <li><a href="#">Item</a></li>
+                            <li class="uk-nav-header">Header</li>
+                            <li><a href="#">Item</a></li>
+                            <li><a href="#">Item</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="#">Item</a></li>
+                        </ul>
+                    </div>
                 </li>
-                <!-- <li class="uk-parent"><a href="">My Cookbook</a></li> -->
-                <li class="uk-active"><a href="">Meet the Chefs</a></li>
+                <li class="uk-parent"><a href="">Meet the Chefs</a></li>
             </ul>
         </div>
     </nav>
