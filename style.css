@@ -18,6 +18,9 @@ nav button {
   height: 80px;
   border: none !important;
 }
+.blink-green {
+  background-color: rgb(45, 247, 45) !important;
+}
 
 
 /* _________________________________STYLES FOR RECIPE.HTML______________________________ */
