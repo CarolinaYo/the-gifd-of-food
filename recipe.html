@@ -10,20 +10,29 @@
       href="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/css/uikit.min.css"
     />
 
-    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
+
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Recipe Page -->
     <div class="uk-container uk-container-small">
       <div class="recipeTitle" id="recipeName">
-        <!-- this should come from user input, for now it is hard coded -->
+
+        <button style='font-size:16px'>Add to cookbook<i class='far fa-star'></i></button>
+        <button class="uk-button uk-button-default" type="button"><span
+          class="uk-icon uk-margin-small-right" uk-icon="icon: star"></span>
+      My Cookbook</button>
+
+        <!-- this should come from user input -->
         
-        <!-- <h1>Fried Chicken</h1> -->
+        
       </div>
       <div class="uk-column-1-2 uk-column-divider">
         <div class="recipePic">
@@ -71,11 +80,11 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- <script src="https://unpkg.com/swiper/swiper-bundle.js"></script> -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit-icons.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="script.js"></script>
   </body>
 </html>

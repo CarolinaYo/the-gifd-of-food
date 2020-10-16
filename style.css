@@ -36,3 +36,9 @@ body {
   background-size: auto;
   background-position: center;
 }
+
+/* style for recipe */
+#heart {
+  float: right;
+  
+}
