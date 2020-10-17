@@ -374,11 +374,39 @@ $(document).ready(function () {
 
     }
 
+    // Timeout function that adds a class than removes it in 200 ms
     const blinkGreen = () => {
         $('nav button').addClass('blink-green');
         setTimeout(function(){ 
             $('nav button').removeClass('blink-green')
          }, 200);
+    }
+
+    const upDateCookbook =  () => {
+        let cookBookData = JSON.parse(localStorage.getItem('myCookBook'));
+        let activeRcipe = JSON.parse(localStorage.getItem('activeRecipe'));
+
+
+        let cookBookUlEl = $('#cookBook-dropdown-ul');
+        cookBookUlEl.empty();
+        //       <li class="uk-active">Active</li>
+        let activeTextEl = $('<li>').addClass('uk-active').text('Active')
+        //       <li><a href="#">Current Recipe</a></li>
+        let activeRecipeListItemEl = $('<li>');
+        let activeRecipeLinkEl = $('<a>').attr('href','recipe.html').text(activeRcipe[0]);
+        activeTextEl.append(activeRecipeLinkEl)
+        //       <li class="uk-nav-header">Saved Recipes</li>
+        let savedRecipesListItemEl = $('<li>').addClass('uk-nav-header').text('Saved Recipes');
+
+        cookBookUlEl.append(activeTextEl,activeRecipeListItemEl,savedRecipesListItemEl)
+
+        cookBookData.forEach(recipe => {
+            let listItemEl = $('<li>');
+            let anchorEl = $('<a>').attr('href', 'recipe.html').text(recipe[0]);
+            listItemEl.append(anchorEl);
+            cookBookUlEl.append(listItemEl);
+        })
+
     }
 
 
@@ -444,11 +472,29 @@ $(document).ready(function () {
     
         let new_myCookBook = JSON.stringify(old_myCookBook);
         localStorage.setItem('myCookBook', new_myCookBook);
+        upDateCookbook()
         
     })
+
+
+    $('#cookBook-dropdown-ul').on('click', 'a', function(){
+        let myCookBook = JSON.parse(localStorage.getItem('myCookBook'))
+        let old_activeRecipe = JSON.parse(localStorage.getItem('activeRecipe'));
+        let thisRecipe = $(this).text();
+
+        myCookBook.forEach(recipe => {
+            if (recipe[0] === thisRecipe) {
+
+                old_activeRecipe = recipe
+                let new_activeRecipe =  JSON.stringify( old_activeRecipe);
+                localStorage.setItem('activeRecipe', new_activeRecipe)
+            }
+        })
+        
+    })
+    upDateCookbook()
+
     
-
-
 })
 
 
