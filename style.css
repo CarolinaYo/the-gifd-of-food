@@ -78,6 +78,11 @@ body {
 
 #saveRecipe{
 color: gray;
+background-color: green;
+}
+
+#saveRecipe:hover{
+  background-color: hotpink;
 }
 
 .mt-20 {
