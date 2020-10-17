@@ -15,15 +15,11 @@ If you're new to Markdown, read the GitHub guide on [Mastering Markdown](https:/
 If you need an example of a good README, check out [the VSCode repository](https://github.com/microsoft/vscode).
 
 
-## Table of Contents (Optional)
-
-If your README is very long, add a table of contents to make it easy for users to find what they need.
-
-* [Installation](#installation)
-* [Usage](#usage)
-* [Credits](#credits)
-* [License](#license)
-
+## A couple of things our team learned:
+* Using git status often is very important to know what you are choosing to stage for commit
+* We learned how to create GitHub branches and Pull Requests
+* Media queries.
+* Utilized a new CSS Framework (UIkit) besides Bootstrap.
 
 ## Installation
 
