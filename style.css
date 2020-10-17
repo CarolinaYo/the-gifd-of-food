@@ -58,9 +58,31 @@ body {
   max-width: 100%;
 }
 
+/* _________________________________STYLES FOR RECIPE.HTML______________________________ */
+.recipePic img {
+  width: 60%;
+  height: auto;
+  padding-top: 40px;
+  /* border-radius: 15px; */
+
+}
 .members {
   padding-left: 150px;
   padding-right: 150px;
+}
+
+#recipeName {
+  margin-top: 40px;
+
+}
+
+#saveRecipe{
+color: gray;
+background-color: green;
+}
+
+#saveRecipe:hover{
+  background-color: hotpink;
 }
 
 .mt-20 {
