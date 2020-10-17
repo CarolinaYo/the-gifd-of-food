@@ -61,7 +61,7 @@ $(document).ready(function () {
 
 
             var recipeName = $("<h1>").text(recipeData[0]);
-            console.log(recipeData[0])
+           
 
             $("#recipeName").append(recipeName);
 
@@ -69,14 +69,25 @@ $(document).ready(function () {
             var ingredients = recipeData[1].ingredients;
             // console.log(ingredients);
             for (var i = 0; i < ingredients.length; i++) {
-                console.log(i);
+                
                 var li = $("<li>").text(ingredients[i]);
                 $(".ingredients").append(li);
             }
 
             var instruction = recipeData[1].instruction;
-            var pInstruction = $("<p>").text(instruction);
+
+            //take that original string and split by \n (enter key or empty line) which return in array of each split.
+
+            instruction = instruction.split('\n');
+             //For each item in instruction...
+            instruction.forEach(item => {
+            
+            //each item in the array is assign to <p> element.    
+            var pInstruction = $("<p>").text(item);
+            //appending the value in pInstruction to instructionContainer.
             $(".instructionContainer").append(pInstruction);
+            }) 
+
 
             mealInput = recipeData[0];
 
@@ -501,5 +512,3 @@ $(document).ready(function () {
 
 
 })
-
-
