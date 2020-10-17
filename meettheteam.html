@@ -1,93 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Gifd Of Food</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<!-- This is the navbar -->
-    <nav class="uk-navbar-container, uk-navbar">
+    <!-- This is the navbar -->
+    <nav class="uk-navbar-container uk-dark" uk-navbar>
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
-                <li class="uk-parent"></li><a href="" class="uk-navbar-item uk-logo">The Gifd of Food</a></li>
-                <li class="uk-parent"><a href="">My Cookbook</a></li>
-                <li class="uk-active"><a href="">Meet the Chefs</a></li>
+                <li class="uk-active"></li><a href="" class="uk-navbar-item uk-logo">The Gifd of Food</a></li>
+                <li class="uk-parent">
+                    <button class="uk-button uk-button-default" type="button"><span
+                            class="uk-icon uk-margin-small-right" uk-icon="icon: star"></span>
+                        My Cookbook</button>
+                    <div uk-dropdown>
+                        <ul id="cookBook-dropdown-ul" class="uk-nav uk-dropdown-nav">
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="uk-parent"><a href="">Meet the Chefs</a></li>
             </ul>
         </div>
     </nav>
 
-<!-- Adding a UIkit container -->
+    <!-- Adding a UIkit container -->
     <div class="uk-container, border">
 
-<!-- Adding the logo -->
-    <img data-src="./Assets/logo.png" width="100" height="100" alt="The Gifd of Food logo" uk-img>
-    
-<!-- Adding the UIkit card body -->
-    <div class="uk-card uk-card-body">
-        <h1 class="uk-heading-line uk-text-center"><span>Meet the Chefs</span></h1>
-    </div>
+        <!-- Adding the logo -->
+        <img data-src="./Assets/logo.png" width="100" height="100" alt="The Gifd of Food logo" uk-img>
 
-<main id="teambody" class ="border">
-    <div class="uk-grid-column-small uk-grid-row-large uk-child-width-1-3@s uk-text-center uk-column-2-4  uk-column-1-4 uk-column-divider" uk-grid>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Dania</div>
-            <p>I'm cool</p>
+        <!-- Adding the UIkit card body -->
+        <div class="uk-card uk-card-body members">
+            <h1 class="uk-heading-line uk-text-center"><span class="header">Meet the Chefs</span></h1>
+
+            <main id="teambody" class="border uk-grid">
+                <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-width-1-2 uk-padding"
+                    uk-grid>
+                    <div class="uk-card-media-left uk-cover-container">
+                        <img src="./Assets/image_box.png" alt="" uk-cover>
+                        <canvas width="600" height="400"></canvas>
+                    </div>
+                    <div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">Brandon VanAllen</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-width-1-2"
+                    uk-grid>
+                    <div class="uk-card-media-left uk-cover-container">
+                        <img src="./Assets/image_box.png" alt="" uk-cover>
+                        <canvas width="600" height="400"></canvas>
+                    </div>
+                    <div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">Carolina Yoedhana</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-width-1-2"
+                    uk-grid>
+                    <div class="uk-card-media-left uk-cover-container">
+                        <img src="./Assets/image_box.png" alt="" uk-cover>
+                        <canvas width="600" height="400"></canvas>
+                    </div>
+                    <div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">Dania Rinker</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-width-1-2"
+                    uk-grid>
+                    <div class="uk-card-media-left uk-cover-container">
+                        <img src="./Assets/image_box.png" alt="" uk-cover>
+                        <canvas width="600" height="400"></canvas>
+                    </div>
+                    <div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">Selma Elgabalawy</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Selma</div>
-            <p>I'm cool</p>
+        <div class="swiper-container" style="visibility: hidden;">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+                <div class="swiper-slide" style="background-image:url(https://via.placeholder.com/150)"></div>
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Carolina</div>
-            <p>I'm cool</p>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Brandon</div>
-            <p>I'm cool</p>
-        </div>
-    </div>
-    
-    <!-- commented out for trial 
-        
-        <div class="uk-grid-small uk-child-width-expand@s uk-text-center" uk-grid>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Carolina</div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Item</div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Brandon</div>
-        </div>
-    </div>
-    
-    <div class="uk-grid-medium uk-child-width-expand@s uk-text-center" uk-grid>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Item</div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Selma</div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Item</div>
-        </div>
-    </div>
-    
-    <div class="uk-grid-large uk-child-width-expand@s uk-text-center" uk-grid>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Dania</div>
-        </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">Item</div>
-        </div>
-        <div>
-    </div> -->
-</main>
-</div>
-    <script src="script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit-icons.min.js"></script>
+        <script src="script.js"></script>
 </body>
+
 </html>

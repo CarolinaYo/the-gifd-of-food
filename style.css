@@ -13,6 +13,24 @@ body {
   min-height: 100%;
 }
 
+/*  ________________________STYLES FOR MY COOK BOOK  DROPDOWN MENU_______________________*/
+nav button {
+  height: 80px;
+  border: none !important;
+}
+.blink-green {
+  background-color: rgb(45, 247, 45) !important;
+}
+
+
+/* _________________________________STYLES FOR RECIPE.HTML______________________________ */
+.recipePic img {
+  width: 90%;
+  height: auto;
+  padding-top: 61px;
+}
+
+
 .swiper-container {
   width: 100%;
   height: 20%;
@@ -26,27 +44,12 @@ body {
   width: 20%;
   height: auto;
 }
-/* Dania Tests CSS Below */
-.border {
-  border: dashed black 1px;
-}
 
+/* Selma CSS */
 body {
   background-image: url("./Assets/background_lower.jpg");
   background-size: auto;
   background-position: center;
-}
-
-/* style for recipe */
-/* #heart {
-  float: right;
-  
-} */
-#saveRecipe {
-  float: right;
-  margin-top: 20px;
-  margin-left: auto;
-
 }
 
 /* _________________________________STYLES FOR RECIPE.HTML______________________________ */
@@ -55,3 +58,9 @@ body {
   height: auto;
   padding-top: 61px;
 }
+.members {
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+
