@@ -31,7 +31,7 @@ $(document).ready(function () {
         localStorage.setItem('listOfMeals', '[]')
     }
     if (localStorage.getItem('myCookBook') === null) {
-        localStorage.setItem('myCookBook','[]')
+        localStorage.setItem('myCookBook', '[]')
     }
     // ============================================================================
 
@@ -44,74 +44,78 @@ $(document).ready(function () {
 
     // Declare function that takes an argument called recipeObj
 
-    function recipeObj(){
+    function recipeObj() {
         let mealInput = ''
-        
-           
-        if (localStorage.getItem('activeRecipe') !==null){
 
-            var recipeData= JSON.parse(localStorage.getItem("activeRecipe"));
+
+        if (localStorage.getItem('activeRecipe') !== null && localStorage.getItem('activeRecipe') !== '[]') {
+
+            var recipeData = JSON.parse(localStorage.getItem("activeRecipe"));
 
             var recipeImage = $("<div class = 'recipeImage'>");
-            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail)//.css({"width":"300px","height":"300px"});
+            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail)
 
             // console.log(recipeImage);
 
             $(".recipePic").append(recipeImage);
-            
-            
+
+
             var recipeName = $("<h1>").text(recipeData[0]);
 
             $("#recipeName").append(recipeName);
 
-            
+
             var ingredients = recipeData[1].ingredients;
             // console.log(ingredients);
-            for (var i=0; i<ingredients.length; i++){
+            for (var i = 0; i < ingredients.length; i++) {
                 console.log(i);
                 var li = $("<li>").text(ingredients[i]);
                 $(".ingredients").append(li);
             }
-            
+
             var instruction = recipeData[1].instruction;
             var pInstruction = $("<p>").text(instruction);
             $(".instructionContainer").append(pInstruction);
 
             mealInput = recipeData[0];
 
-        }
 
-        
-        $.ajax({
-            url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${mealInput}&offset=0&rating=g&lang=en`,
-            method: 'GET'
-        }).then(function (gifyResponse) {
-            // Handle data
-            console.log(gifyResponse);
+            $.ajax({
+                url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${mealInput}&offset=0&rating=g&lang=en`,
+                method: 'GET'
+            }).then(function (gifyResponse) {
+                // Handle data
+                console.log(gifyResponse);
 
-            // create an array for all the objects in the gifyResponse.data array
-            let gifyArray = gifyResponse.data;
-            // log to check if I target what I expected
-            // console.log(gifyArray);
+                // create an array for all the objects in the gifyResponse.data array
+                let gifyArray = gifyResponse.data;
+                // log to check if I target what I expected
+                // console.log(gifyArray);
 
-            // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
-            // Calling the function to actually create the slider
-            // createSlider(gifyArray)
+                // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
+                // Calling the function to actually create the slider
+                // createSlider(gifyArray)
 
-            // // Updating slider with gify response ¯\_(ツ)_/¯....
-            // Array to store 10 unique random numbers from 0-50
-            let limit = createUniqueNumbers(50, 10);
-            $('.swiper-slide').each(function (index) {
-                // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
-                $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
+                // // Updating slider with gify response ¯\_(ツ)_/¯....
+                // Array to store 10 unique random numbers from 0-50
+                let limit = createUniqueNumbers(50, 10);
+                $('.swiper-slide').each(function (index) {
+                    // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+                    $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
 
-                // console.log(gifyResponse.data[index].images.original.url);
+                    // console.log(gifyResponse.data[index].images.original.url);
+                })
+
             })
 
-        })
-    
-    
-    
+
+        }
+
+
+
+
+
+
     }
 
     recipeObj();
@@ -377,12 +381,12 @@ $(document).ready(function () {
     // Timeout function that adds a class than removes it in 200 ms
     const blinkGreen = () => {
         $('nav button').addClass('blink-green');
-        setTimeout(function(){ 
+        setTimeout(function () {
             $('nav button').removeClass('blink-green')
-         }, 200);
+        }, 200);
     }
 
-    const upDateCookbook =  () => {
+    const upDateCookbook = () => {
         let cookBookData = JSON.parse(localStorage.getItem('myCookBook'));
         let activeRcipe = JSON.parse(localStorage.getItem('activeRecipe'));
 
@@ -393,12 +397,12 @@ $(document).ready(function () {
         let activeTextEl = $('<li>').addClass('uk-active').text('Active')
         //       <li><a href="#">Current Recipe</a></li>
         let activeRecipeListItemEl = $('<li>');
-        let activeRecipeLinkEl = $('<a>').attr('href','recipe.html').text(activeRcipe[0]);
+        let activeRecipeLinkEl = $('<a>').attr('href', 'recipe.html').text(activeRcipe[0]);
         activeTextEl.append(activeRecipeLinkEl)
         //       <li class="uk-nav-header">Saved Recipes</li>
         let savedRecipesListItemEl = $('<li>').addClass('uk-nav-header').text('Saved Recipes');
 
-        cookBookUlEl.append(activeTextEl,activeRecipeListItemEl,savedRecipesListItemEl)
+        cookBookUlEl.append(activeTextEl, activeRecipeListItemEl, savedRecipesListItemEl)
 
         cookBookData.forEach(recipe => {
             let listItemEl = $('<li>');
@@ -414,7 +418,7 @@ $(document).ready(function () {
 
     //----------------EXAMPLE OF THE EVENT HANDLER FUNCTION FOR GETTING A RECIPE--------------
     // select input  and get value from it 
-    $('#searchBtn').on('click', function(event) {
+    $('#searchBtn').on('click', function (event) {
         event.preventDefault();
         let inputValue = $('#meal-item').val();
 
@@ -430,54 +434,54 @@ $(document).ready(function () {
 
     $('#meal-container').on('click', 'div.recipe-div', function () {
         let mealText = $(this).text();
-    
+
         console.log(mealText);
         console.log('-----');
-    
+
         let recipeArray = JSON.parse(localStorage.getItem('listOfMeals'));
         let recipeToStore = JSON.parse(localStorage.getItem('activeRecipe'))
-    
+
         recipeArray.forEach(recipe => {
             if (mealText === recipe[0]) {
-    
+
                 console.log(recipe[1]);
-    
-    
+
+
                 recipeToStore = recipe;
-    
+
             }
         })
         localStorage.setItem('activeRecipe', JSON.stringify(recipeToStore));
-    
+
     })
-    
-    
+
+
     // Event listener on a saveRecipe button to save Curently displayed recipe to the 
     // localStorage object that conatins the saved recipes
-    $('#saveRecipe').on('click', function() {
+    $('#saveRecipe').on('click', function () {
         let activeRecipe = JSON.parse(localStorage.getItem('activeRecipe'));
         let old_myCookBook = JSON.parse(localStorage.getItem('myCookBook'));
-    
+
         let testRecipe = true;
         old_myCookBook.forEach(item => {
             if (item[0] === activeRecipe[0]) {
                 testRecipe = false;
             }
         });
-    
+
         if (testRecipe === true) {
             old_myCookBook.push(activeRecipe)
             blinkGreen();
         }
-    
+
         let new_myCookBook = JSON.stringify(old_myCookBook);
         localStorage.setItem('myCookBook', new_myCookBook);
         upDateCookbook()
-        
+
     })
 
 
-    $('#cookBook-dropdown-ul').on('click', 'a', function(){
+    $('#cookBook-dropdown-ul').on('click', 'a', function () {
         let myCookBook = JSON.parse(localStorage.getItem('myCookBook'))
         let old_activeRecipe = JSON.parse(localStorage.getItem('activeRecipe'));
         let thisRecipe = $(this).text();
@@ -486,15 +490,15 @@ $(document).ready(function () {
             if (recipe[0] === thisRecipe) {
 
                 old_activeRecipe = recipe
-                let new_activeRecipe =  JSON.stringify( old_activeRecipe);
+                let new_activeRecipe = JSON.stringify(old_activeRecipe);
                 localStorage.setItem('activeRecipe', new_activeRecipe)
             }
         })
-        
+
     })
     upDateCookbook()
 
-    
+
 })
 
 
