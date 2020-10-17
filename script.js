@@ -57,7 +57,7 @@ $(document).ready(function () {
 
             // console.log(recipeImage);
 
-            $(".recipePic").prepend(recipeImage);
+            $(".recipePic").append(recipeImage);
             
             
             var recipeName = $("<h1>").text(recipeData[0]);
