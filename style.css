@@ -77,16 +77,12 @@ body {
 }
 
 #saveRecipe{
-color: gray;
-background-color: green;
+color: rgb(245, 243, 243);
+background-color: rgb(146, 148, 146);
 }
 
 #saveRecipe:hover{
-  background-color: hotpink;
-}
-
-.mt-20 {
-  margin-top: 20px;
+  background-color: rgb(109, 221, 119);
 }
 
 .mt-auto {
@@ -98,7 +94,11 @@ background-color: green;
 }
 
 main {
+  margin-top: 3rem;
   min-height: 100%;
+}
+#teambody img{
+  margin-top: 1rem;
 }
 
 footer {
