@@ -53,7 +53,7 @@ $(document).ready(function () {
 
             // console.log(recipeImage);
 
-            $(".recipePic").append(recipeImage);
+            $(".recipePic").prepend(recipeImage);
             
             
             var recipeName = $("<h1>").text(recipeData[0]);
@@ -73,10 +73,9 @@ $(document).ready(function () {
             var pInstruction = $("<p>").text(instruction);
             $(".instructionContainer").append(pInstruction);
 
-
-
         }
-        //Input? or random?------------------------------------
+
+        
         var mealInput = "hungry";
         var limit = 10;
             

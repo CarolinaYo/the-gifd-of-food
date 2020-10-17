@@ -21,42 +21,35 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Recipe Page -->
-    <div class="uk-container uk-container-small">
-      <div class="recipeTitle" id="recipeName">
+<!-- 
+----------------------------------- -->
 
-        <button style='font-size:16px'>Add to cookbook<i class='far fa-star'></i></button>
-        <button class="uk-button uk-button-default" type="button"><span
-          class="uk-icon uk-margin-small-right" uk-icon="icon: star"></span>
-      My Cookbook</button>
-
-        <!-- this should come from user input -->
-        
-        
-      </div>
-      <div class="uk-column-1-2 uk-column-divider">
-        <div class="recipePic">
-          <!-- This column is for the recipe image -->
-          
-        </div>
-
-        <!-- This column is for the ingredients -->
-
-        <div class="ingredientContainer">
-          <h2>Ingredients:</h2>
-          <ul class="uk-list uk-list-striped ingredients">
-          
-          </ul>
-        </div>
-      </div>
-
-      <!-- need another container for instruction -->
-
-      <div class="uk-column-span instructionContainer">
-        <h2>Instruction:</h2>
-        
-      </div>
+ <!-- Recipe Page -->
+ <div class="uk-container uk-container-small">
+ 
+  <div class="recipeTitle" id="recipeName">
+    <!-- this should come from user input, for now it is hard coded -->
+    <!-- <h1>Fried Chicken</h1> -->
+  </div>
+  <div class="uk-text-center" uk-grid>
+    <div class="recipePic uk-width-1-2">
+      <button id="saveRecipe" class="uk-button uk-button-default" type="button">Save Recipe <span uk-icon="star"></span></button>
+      <!-- This column is for the recipe image -->
     </div>
+    <!-- This column is for the ingredients -->
+    <div class="ingredientContainer uk-width-1-2">
+      <h2>Ingredients:</h2>
+      <ul class="uk-list uk-list-striped ingredients">
+      </ul>
+    </div>
+  </div>
+  <!-- need another container for instruction -->
+  <div class="uk-column-span uk-width-1-1 instructionContainer">
+    
+    <h2>Instruction:</h2>
+  </div>
+</div>
+
 
     <div class="swiper-container">
       <div class="swiper-wrapper">
