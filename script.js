@@ -61,6 +61,7 @@ $(document).ready(function () {
 
 
             var recipeName = $("<h1>").text(recipeData[0]);
+            console.log(recipeData[0])
 
             $("#recipeName").append(recipeName);
 
