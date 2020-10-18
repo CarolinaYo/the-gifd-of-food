@@ -85,21 +85,59 @@ $(document).ready(function () {
 
             mealInput = recipeData[0];
 
+            let gifyTest = 0;
 
             $.ajax({
                 url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${mealInput}&offset=0&rating=g&lang=en`,
                 method: 'GET'
             }).then(function (gifyResponse) {
                 // Handle data
+                console.log(gifyResponse);
+                gifyTest = gifyResponse.data.length;
 
                 // // Updating slider with gify response ¯\_(ツ)_/¯....
                 // Array to store 10 unique random numbers from 0-50
                 let limit = createUniqueNumbers(50, 10);
-                $('.swiper-slide').each(function (index) {
-                    // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
-                    $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
+                console.log(limit);
 
-                })
+                if (gifyTest === 50) {
+                    $('.swiper-slide').each(function (index) {
+                        // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+
+                        $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
+                    });
+                } else if (gifyTest >= 10) {
+                    let newLimit = createUniqueNumbers(gifyTest, 10)
+                    $('.swiper-slide').each(function (index) {
+                        // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+
+                        $(this).css("background-image", "url(" + gifyResponse.data[newLimit[index]].images.original.url + ")");
+                    });
+                }
+
+                // depends on data returned in the above results.
+            }).then(function () {
+                // If there wasn't enough gifys returned from the meal name generate random gifs for the term hungry.
+                if (gifyTest < 10) {
+
+                    let gifySearchTerm = 'hungry';
+
+                    $.ajax({
+                        url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${gifySearchTerm}&offset=0&rating=g&lang=en`,
+                        method: 'GET'
+                    }).then(function (gifyHungryResponse) {
+                        // Handle data
+                        gifyTest = gifyHungryResponse.data.length;
+
+                        // Array to store 10 unique random numbers from 0-50
+                        let hungryLimit = createUniqueNumbers(50, 10);
+                        
+                        $('.swiper-slide').each(function (index) {
+                            // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+                            $(this).css("background-image", "url(" + gifyHungryResponse.data[hungryLimit[index]].images.original.url + ")");
+                        });
+                    })
+                }
             })
         }
     }
