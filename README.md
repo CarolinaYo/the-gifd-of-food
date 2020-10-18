@@ -22,10 +22,10 @@ In the future we hope to implement better API endpoints that provide better data
 * If you need to see our deployed webpage for our code, please visit our hosted website at: https://carolinayo.github.io/the-gifd-of-food/ 
 
 ## Usage 
-<img data-src="./Assets/search.png" alt="Search Page">
-<img data-src="./Assets/recipe1.png" alt="Recipe Page 1">
-<img data-src="./Assets/recipe2.png" alt="Recipe Page 2">
-<img data-src="./Assets/meetchefs.png" alt="Meet the Team Page">
+<img src="./Assets/search.png" alt="Search Page">
+<img src="./Assets/recipe1.png" alt="Recipe Page 1">
+<img src="./Assets/recipe2.png" alt="Recipe Page 2">
+<img src="./Assets/meetchefs.png" alt="Meet the Team Page">
 
 ## Collaborators
 * Brandon VanAllen https://github.com/BrandonVA (Backend)
