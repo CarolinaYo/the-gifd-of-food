@@ -25,6 +25,9 @@ nav button {
   height: 80px;
   border: none !important;
 }
+.uk-button-default {
+  color: #999;
+}
 .blink-green {
   background-color: rgb(45, 247, 45) !important;
 }
@@ -53,14 +56,15 @@ nav button {
 .recipePic img {
   width: 60%;
   height: auto;
-  padding-top: 61px;
-  /* border-radius: 15px; */
+  margin-top: 61px;
+  border-radius: 15px;
 
 }
 .instructionContainer {
   background-color: #d1cfd0d4;
   border-radius: 15px;
   padding: 15px;
+  margin-top: 1rem;
 }
 
 
@@ -106,3 +110,20 @@ footer {
   font-size: medium;
   position: sticky;
 }
+
+
+/* _____________________________MEDIA QUERY____________________________________ */
+@media only screen and (min-width: 1200px) {
+
+  #search-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .recipePic img {
+    width: 45%;
+  }
+}
+
