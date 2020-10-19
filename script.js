@@ -92,13 +92,11 @@ $(document).ready(function () {
                 method: 'GET'
             }).then(function (gifyResponse) {
                 // Handle data
-                console.log(gifyResponse);
                 gifyTest = gifyResponse.data.length;
 
                 // // Updating slider with gify response ¯\_(ツ)_/¯....
                 // Array to store 10 unique random numbers from 0-50
                 let limit = createUniqueNumbers(50, 10);
-                console.log(limit);
 
                 if (gifyTest === 50) {
                     $('.swiper-slide').each(function (index) {
