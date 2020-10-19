@@ -28,7 +28,7 @@ In the future we hope to implement better API endpoints that provide better data
 ![Recipe Page 1](./Assets/recipe1_2.png)
 ### Recipe 2
 ![Recipe Page 2](./Assets/recipe2_2.png)
-### Step 4
+### Meet the chefs
 ![Meet the Team Page](./Assets/meetchefs2.png)
 
 ## Collaborators
