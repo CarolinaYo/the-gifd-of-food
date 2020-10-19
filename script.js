@@ -340,7 +340,7 @@ $(document).ready(function () {
 
         getRecipe(inputValue);
 
-        $('.swiper-container').css('visibility', 'visible');
+        
         $('#meal-container').css('display', 'block');
         $('#meal-list').empty();
 
