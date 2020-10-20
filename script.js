@@ -129,7 +129,7 @@ $(document).ready(function () {
 
                         // Array to store 10 unique random numbers from 0-50
                         let hungryLimit = createUniqueNumbers(50, 10);
-                        
+
                         $('.swiper-slide').each(function (index) {
                             // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
                             $(this).css("background-image", "url(" + gifyHungryResponse.data[hungryLimit[index]].images.original.url + ")");
@@ -213,7 +213,10 @@ $(document).ready(function () {
                     let parentDivEl = $('<div>').addClass('uk-flex-middle uk-grid recipe-div');
                     let childDivNameEl = $('<div>').addClass('uk-width-2-3@m');
                     let childDivImageEl = $('<div>').addClass('uk-width-1-3@m uk-flex-first');
-                    let thumbnailImageEl = $('<img>').css({ 'width': '70px', 'height': '70px' });
+                    let thumbnailImageEl = $('<img>').css({
+                        'width': '70px',
+                        'height': '70px'
+                    });
                     let mealNamParagraghEl = $('<p>').addClass('uk-text-lead')
 
                     let mealName = item[0];
@@ -229,13 +232,13 @@ $(document).ready(function () {
                     $('#meal-list').append(recipeHtmlLink, $('<hr>'));
                 })
 
-
-            } else if ($('#meal-item').hasClass('uk-form-success')) {
+                $('#meal-container').css('display', 'block');
+            } else {
                 $('#meal-item').removeClass('uk-form-success');
                 $('#meal-item').addClass('uk-form-danger');
+                $('#meal-container').css('display', 'none');
+                UIkit.modal.alert('The meal you have searched does not exist.')
             }
-
-
         })
     }
 
@@ -340,8 +343,6 @@ $(document).ready(function () {
 
         getRecipe(inputValue);
 
-        
-        $('#meal-container').css('display', 'block');
         $('#meal-list').empty();
 
 
