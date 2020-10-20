@@ -182,7 +182,7 @@ $(document).ready(function () {
                         // checking if the object properties that contain ingredients have any value.
                         if (meal.hasOwnProperty(testForIngredients) && meal[testForIngredients] !== '' && meal[testForIngredients] !== null) {
                             // If they do add them to a var and push that to an array that conatins all the ingredients from other properties
-                            ingredient = `${meal[testForIngredients]} ${meal[testForAmount]}`
+                            ingredient = `${meal[testForAmount]} ${meal[testForIngredients]} `
                             ingredientsArray.push(ingredient);
                         }
                     }
