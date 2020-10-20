@@ -30,6 +30,9 @@ $(document).ready(function () {
     if (localStorage.getItem('listOfMeals') === null) {
         localStorage.setItem('listOfMeals', '[]')
     }
+    if (localStorage.getItem('myCookBook') === null) {
+        localStorage.setItem('myCookBook', '[]')
+    }
     // ============================================================================
 
 
@@ -39,101 +42,105 @@ $(document).ready(function () {
     // ==============================================================================
     // ----------------- CREATE A FUNCTION TO DISPLAY SELECTED RECIPE----------------
 
-    // Declare function that takes an argument called recipeObj
+    function recipeObj() {
+        let mealInput = ''
 
-    function recipeObj(){
-        
-           
-        if (localStorage.getItem('activeRecipe') !==null){
 
-            var recipeData= JSON.parse(localStorage.getItem("activeRecipe"));
+        if (localStorage.getItem('activeRecipe') !== null && localStorage.getItem('activeRecipe') !== '[]') {
+
+            var recipeData = JSON.parse(localStorage.getItem("activeRecipe"));
 
             var recipeImage = $("<div class = 'recipeImage'>");
-            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail).css({"width":"300px","height":"300px"});
+            recipeImage = $("<img>").attr("src", recipeData[1].thumbnail)
 
-            // console.log(recipeImage);
 
             $(".recipePic").append(recipeImage);
-            
-            
+
             var recipeName = $("<h1>").text(recipeData[0]);
 
             $("#recipeName").append(recipeName);
 
-            
             var ingredients = recipeData[1].ingredients;
-            // console.log(ingredients);
-            for (var i=0; i<ingredients.length; i++){
-                console.log(i);
+
+            for (var i = 0; i < ingredients.length; i++) {
+
                 var li = $("<li>").text(ingredients[i]);
                 $(".ingredients").append(li);
             }
-            
+
             var instruction = recipeData[1].instruction;
-            var pInstruction = $("<p>").text(instruction);
-            $(".instructionContainer").append(pInstruction);
 
+            //take that original string and split by \n (enter key or empty line) which return in array of each split.
 
+            instruction = instruction.split('\n');
+            //For each item in instruction...
+            instruction.forEach(item => {
 
-        }
-        //Input? or random?------------------------------------
-        var mealInput = "hungry";
-        var limit = 10;
-            
-        $.ajax({
-            
-            url:`https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${ mealInput }&limit=${ limit }&offset=0&rating=g&lang=en`,
-            method: 'GET'
-        }).then(function(gifyResponse){
-            // Handle data
-            console.log(gifyResponse);
-
-            // create an array for all the objects in the gifyResponse.data array
-            let gifyArray = gifyResponse.data;
-            // log to check if I target what I expected
-            // console.log(gifyArray);
-
-            // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
-            // Calling the function to actually create the slider
-            // createSlider(gifyArray)
-
-            // // Updating slider with gify response ¯\_(ツ)_/¯....
-            $('.swiper-slide').each(function( index ){
-
-                $(this).css("background-image", "url(" + gifyResponse.data[index].images.original.url + ")");
-
-                // console.log(gifyResponse.data[index].images.original.url);
+                //each item in the array is assign to <p> element.    
+                var pInstruction = $("<p>").text(item);
+                //appending the value in pInstruction to instructionContainer.
+                $(".instructionContainer").append(pInstruction);
             })
 
-        })
-    
-    
+
+            mealInput = recipeData[0];
+
+            let gifyTest = 0;
+
+            $.ajax({
+                url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${mealInput}&offset=0&rating=g&lang=en`,
+                method: 'GET'
+            }).then(function (gifyResponse) {
+                // Handle data
+                gifyTest = gifyResponse.data.length;
+
+                // // Updating slider with gify response ¯\_(ツ)_/¯....
+                // Array to store 10 unique random numbers from 0-50
+                let limit = createUniqueNumbers(50, 10);
+
+                if (gifyTest === 50) {
+                    $('.swiper-slide').each(function (index) {
+                        // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+
+                        $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
+                    });
+                } else if (gifyTest >= 10) {
+                    let newLimit = createUniqueNumbers(gifyTest, 10)
+                    $('.swiper-slide').each(function (index) {
+                        // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+
+                        $(this).css("background-image", "url(" + gifyResponse.data[newLimit[index]].images.original.url + ")");
+                    });
+                }
+
+                // depends on data returned in the above results.
+            }).then(function () {
+                // If there wasn't enough gifys returned from the meal name generate random gifs for the term hungry.
+                if (gifyTest < 10) {
+
+                    let gifySearchTerm = 'hungry';
+
+                    $.ajax({
+                        url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${gifySearchTerm}&offset=0&rating=g&lang=en`,
+                        method: 'GET'
+                    }).then(function (gifyHungryResponse) {
+                        // Handle data
+                        gifyTest = gifyHungryResponse.data.length;
+
+                        // Array to store 10 unique random numbers from 0-50
+                        let hungryLimit = createUniqueNumbers(50, 10);
+
+                        $('.swiper-slide').each(function (index) {
+                            // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
+                            $(this).css("background-image", "url(" + gifyHungryResponse.data[hungryLimit[index]].images.original.url + ")");
+                        });
+                    })
+                }
+            })
+        }
     }
 
     recipeObj();
-
-
-    // Inside the function create the elements required to put the container together 
-    // Example div.(main-container), img.(img-thumbnail), ul.(contain-ingrentes) p.(instructions)
-    // After you create the elements set the required values 
-    // I will set the data up...
-    //  in way that if there is more than one item It will be an array so you can use 
-    //  recipeObj.(array-name).forEach(item => { create element and append to parent element})
-
-
-    // dataStructure for the selected recipe will be an array with two values the name will be array[0]
-    // the object containg the recipe info will be array[1] so target the values of array[1] in object like form 
-    // example store data like let recipeData = array[1] 
-    // let mealTitle = recipeData.name
-    // recipeData.name
-    // recipeData.thumbnail
-    // recipeData.instruction
-    // recipeData.ingredients --- returns an array you will have to loop through each one and update.
-
-
-
-
-
 
     //=============================================================================
     // ---------------------HANDLES API CALL FROM USER INPUT-----------------------
@@ -146,8 +153,6 @@ $(document).ready(function () {
         }).then(function (response) {
 
             // Handle data
-            console.log(response);
-
             if (response.meals !== null) {
 
                 $('#meal-item').addClass('uk-form-success')
@@ -192,144 +197,52 @@ $(document).ready(function () {
                 })
 
 
-
-                //=======================================| DONE |=========================================================
                 // -- SET THE LOCAL STORAGE TO THE ARRAY CREATED THAT WAY WHEN YOU CLICK ON AN ITEM YOU CAN TARGET
-                //--  THAT ITEM IN THE ARRAY AND DISPLAY THE RECIPE INFO TO THE DOM-------------------------------|DONE
-                let old_listOfMeals = JSON.parse(localStorage.getItem('listOfMeals')) // MAYBE not useful here but in the function to loop through list items on the dom
+                //--  THAT ITEM IN THE ARRAY AND DISPLAY THE RECIPE INFO TO THE DOM
+
                 let new_listOfMeals = JSON.stringify(localArray);
                 localStorage.setItem('listOfMeals', new_listOfMeals);
 
-                console.log(localArray);
 
 
-                //===================| CALL FUNCTION HERE TO DISPLAY ALL ITEMS RECIVED FROM AJAX CALL  | ====================
-                //------------------put function to display the all the possible meals here.-----------------------
-                // a function that will loop through all the items in localArray and display a list to the user
-                // =======================================| PSEUDO CODE BELOW |==============================================
+                //------------------display the all the possible meals here.-----------------------
+                // loop through all the items in localArray and display a list to the user
 
                 localArray.forEach(item => {
+                    let recipeHtmlLink = $('<a>').attr('href', 'recipe.html')
                     let parentDivEl = $('<div>').addClass('uk-flex-middle uk-grid recipe-div');
                     let childDivNameEl = $('<div>').addClass('uk-width-2-3@m');
                     let childDivImageEl = $('<div>').addClass('uk-width-1-3@m uk-flex-first');
-                    let thumbnailImageEl = $('<img>').css({ 'width': '50px', 'height': '50px' });
+                    let thumbnailImageEl = $('<img>').css({
+                        'width': '70px',
+                        'height': '70px'
+                    });
                     let mealNamParagraghEl = $('<p>').addClass('uk-text-lead')
 
                     let mealName = item[0];
                     let mealThumbnail = item[1].thumbnail;
 
-                    console.log(mealName, mealThumbnail);
                     mealNamParagraghEl.text(mealName);
                     thumbnailImageEl.attr('src', mealThumbnail);
                     childDivImageEl.append(thumbnailImageEl);
                     childDivNameEl.append(mealNamParagraghEl);
                     parentDivEl.append(childDivNameEl, childDivImageEl);
+                    recipeHtmlLink.append(parentDivEl);
 
-                    $('#meal-list').append(parentDivEl, $('<hr>'));
-
-
-
+                    $('#meal-list').append(recipeHtmlLink, $('<hr>'));
                 })
 
-                //----------------------------------------THIS FUNCTION WILL BE BUILT OUTSIDE OF API CALL------------------------------------
-                //  Need a function handle displaying all the items in the array built above 
-                // example of an item in the array ['meal name', {object containing the recipe info} ] 
-                // display the name like in the example as shown above the recipes meal name would be... 'meal name'
-                // you can also add other data too like thumbnal if you choose
-                // storage array containg all the items from the ajax call then loop through until you find a match and 
-                // than use that objects data to display the correct  recipe info 
-                // like an event to be clicked on later to run a fuction that test local storage for that item
-                //_________________________________________________________________________________________
-                //   ---- Below is an example of why we deal with the data the way we are-----------
-                // in the next function to actually display the recipe info......
-                //  let recipeArray = JSON.parse(localStorage.getItem('storedArray')) 
-                // inside of a for loop or forEach() function loop through get right data
-                // if (listItems value === recipeArray[0]) {  
-                // display info for recipeArray[1]  which equals the stored data of the recipe for that meal name.
-                //}
-                // than handle all the required code to create elements and update the DOM
-                // ----------------------------------------------------------------------------------------------------------------------
-
-            } else if ($('#meal-item').hasClass('uk-form-success')) {
+                $('#meal-container').css('display', 'block');
+            } else {
                 $('#meal-item').removeClass('uk-form-success');
                 $('#meal-item').addClass('uk-form-danger');
+                $('#meal-container').css('display', 'none');
+                UIkit.modal.alert('The meal you have searched does not exist.')
             }
-
-
         })
-            .then(function () {
-                // Get a gify
-
-                $.ajax({
-                    url: `https://api.giphy.com/v1/gifs/search?api_key=us0J0cVGS2H9LjmcpHGBcqjD2X25FYTg&q=${mealInput}&offset=0&rating=g&lang=en`,
-                    method: 'GET'
-                }).then(function (gifyResponse) {
-                    // Handle data
-                    console.log(gifyResponse);
-
-                    // create an array for all the objects in the gifyResponse.data array
-                    let gifyArray = gifyResponse.data;
-                    // log to check if I target what I expected
-                    // console.log(gifyArray);
-
-                    // _________________________________________________________| UK SLIDER FUNCTION CALL |____________
-                    // Calling the function to actually create the slider
-                    // createSlider(gifyArray)
-
-                    // // Updating slider with gify response ¯\_(ツ)_/¯....
-                    // Array to store 10 unique random numbers from 0-50
-                    let limit = createUniqueNumbers(50, 10);
-                    $('.swiper-slide').each(function (index) {
-                        // Updating the gify slider with a gify from the api call with the index of the uniqly generated random number
-                        $(this).css("background-image", "url(" + gifyResponse.data[limit[index]].images.original.url + ")");
-
-                        // console.log(gifyResponse.data[index].images.original.url);
-                    })
-
-                })
-            })
     }
-    // getRecipe('soup');
+
     // =============================================================================
-
-
-
-
-
-
-
-
-    //==========================| CREAT UK SLIDER |=====================================================
-    // -------------- FUNCTION TO UPDATE DOM WITH A SLIDER OF GIFY IMG'S -------------
-
-    // This function takes an array as an argument
-    // const createSlider = array => {
-    //     // Setting up 
-    //     let unorderdListItem = $('<ul>');
-    //     $('#gify-slider').empty();
-    //     unorderdListItem.addClass('uk-slider-items uk-child-width-1-3@s uk-child-width-1-4@')
-
-    //     // loops through each array item and create an Img element with the stored url I want to use 
-    //     array.forEach(item => {
-    //         // Creating jquery img element
-    //         let imgEL = $('<img>');
-    //         // Create a list item to append to ul on the dom.
-    //         let listItemEl = $('<li>').css({'width': '200px', 'margin': '2.5px'});
-    //         // create a var to store this array items orginal url 
-    //         let imageUrl = item.images.fixed_width.url
-    //         // check its value to make sure its what I want 
-    //         // console.log(imageUrl);
-    //         // Once I know what what url is set the attr value with stored var and set other styles after 
-    //         imgEL.attr('src', imageUrl).attr('alt', 'funny gif about the food').css({'width': '200px', 'height': '200px'});
-    //         // appends img to the listItem created 
-    //         listItemEl.append(imgEL);
-    //         // Appends the listItem containing the img created all to the ul in the html document.
-    //         unorderdListItem.append(listItemEl);
-    //     })
-    //     $('#gify-slider').append(unorderdListItem);
-    // }
-    //===============================================================================
-
 
 
     //===================| Function to return an array of numbers that are all unique |==========
@@ -349,11 +262,8 @@ $(document).ready(function () {
 
             // Array to store randomly generated numbers.
             let numberList = [];
-            console.log(numberList, ' =====');
-
             // For loop to make sure you create numbers until you meat the amount called for.
             for (var i = 0; i < amount; i++) {
-                console.log(i);
                 // Var for storing a random number
                 let randomNum = getRandomNumber(maxNum);
                 // Check for seeing if the number already exists.
@@ -386,6 +296,41 @@ $(document).ready(function () {
 
     }
 
+    // Timeout function that adds a class than removes it in 200 ms
+    const blinkGreen = () => {
+        $('nav button').addClass('blink-green');
+        setTimeout(function () {
+            $('nav button').removeClass('blink-green')
+        }, 200);
+    }
+
+    const upDateCookbook = () => {
+        let cookBookData = JSON.parse(localStorage.getItem('myCookBook'));
+        let activeRcipe = JSON.parse(localStorage.getItem('activeRecipe'));
+
+
+        let cookBookUlEl = $('#cookBook-dropdown-ul');
+        cookBookUlEl.empty();
+        //       <li class="uk-active">Active</li>
+        let activeTextEl = $('<li>').addClass('uk-active').text('Active')
+        //       <li><a href="#">Current Recipe</a></li>
+        let activeRecipeListItemEl = $('<li>');
+        let activeRecipeLinkEl = $('<a>').attr('href', 'recipe.html').text(activeRcipe[0]);
+        activeTextEl.append(activeRecipeLinkEl)
+        //       <li class="uk-nav-header">Saved Recipes</li>
+        let savedRecipesListItemEl = $('<li>').addClass('uk-nav-header').text('Saved Recipes');
+
+        cookBookUlEl.append(activeTextEl, activeRecipeListItemEl, savedRecipesListItemEl)
+
+        cookBookData.forEach(recipe => {
+            let listItemEl = $('<li>');
+            let anchorEl = $('<a>').attr('href', 'recipe.html').text(recipe[0]);
+            listItemEl.append(anchorEl);
+            cookBookUlEl.append(listItemEl);
+        })
+
+    }
+
 
 
 
@@ -393,41 +338,70 @@ $(document).ready(function () {
     // select input  and get value from it 
     $('#searchBtn').on('click', function (event) {
         event.preventDefault();
+
         let inputValue = $('#meal-item').val();
 
-        console.log(inputValue);
         getRecipe(inputValue);
 
-        $('.swiper-container').css('visibility', 'visible');
-        $('#meal-container').css('display', 'block');
         $('#meal-list').empty();
 
 
     })
 
-})
+    $('#meal-container').on('click', 'div.recipe-div', function () {
+        let mealText = $(this).text();
+        let recipeArray = JSON.parse(localStorage.getItem('listOfMeals'));
+        let recipeToStore = JSON.parse(localStorage.getItem('activeRecipe'))
 
-$('#meal-container').on('click', 'div.recipe-div', function () {
-    let mealText = $(this).text();
+        recipeArray.forEach(recipe => {
+            if (mealText === recipe[0]) {
+                recipeToStore = recipe;
+            }
+        })
+        localStorage.setItem('activeRecipe', JSON.stringify(recipeToStore));
 
-    console.log(mealText);
-    console.log('-----');
-
-    let recipeArray = JSON.parse(localStorage.getItem('listOfMeals'));
-    let recipeToStore = JSON.parse(localStorage.getItem('activeRecipe'))
-
-    recipeArray.forEach(recipe => {
-        if (mealText === recipe[0]) {
-
-            console.log(recipe[1]);
-
-
-            recipeToStore = recipe;
-
-        }
     })
-    localStorage.setItem('activeRecipe', JSON.stringify(recipeToStore));
 
+
+    // Event listener on a saveRecipe button to save Curently displayed recipe to the 
+    // localStorage object that conatins the saved recipes
+    $('#saveRecipe').on('click', function () {
+        let activeRecipe = JSON.parse(localStorage.getItem('activeRecipe'));
+        let old_myCookBook = JSON.parse(localStorage.getItem('myCookBook'));
+
+        let testRecipe = true;
+        old_myCookBook.forEach(item => {
+            if (item[0] === activeRecipe[0]) {
+                testRecipe = false;
+            }
+        });
+
+        if (testRecipe === true) {
+            old_myCookBook.push(activeRecipe)
+            blinkGreen();
+        }
+
+        let new_myCookBook = JSON.stringify(old_myCookBook);
+        localStorage.setItem('myCookBook', new_myCookBook);
+        upDateCookbook()
+
+    })
+
+
+    $('#cookBook-dropdown-ul').on('click', 'a', function () {
+        let myCookBook = JSON.parse(localStorage.getItem('myCookBook'))
+        let old_activeRecipe = JSON.parse(localStorage.getItem('activeRecipe'));
+        let thisRecipe = $(this).text();
+
+        myCookBook.forEach(recipe => {
+            if (recipe[0] === thisRecipe) {
+
+                old_activeRecipe = recipe
+                let new_activeRecipe = JSON.stringify(old_activeRecipe);
+                localStorage.setItem('activeRecipe', new_activeRecipe)
+            }
+        })
+
+    })
+    upDateCookbook()
 })
-
-
